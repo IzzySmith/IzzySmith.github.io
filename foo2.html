@@ -4,12 +4,11 @@
     function onClick() {
     // feature detect
     if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-    alert("IN");
       DeviceOrientationEvent.requestPermission()
         .then(permissionState => {
           if (permissionState === 'granted') {
             window.addEventListener('deviceorientation', (e) => {
-              document.getElementById("foo").innerText = "alpha:" + e.alpha + ",gamma:" + e.gamma + ",beta:" + e.beta;
+              document.getElementById("foo").innerText = "alpha:" + e.alpha.toFixed(2) + "<br>gamma:" + e.gamma.toFixed(2) + "<br>beta:" + e.beta.toFixed(2);
             });
           }
            else {
@@ -18,13 +17,13 @@
         })
         .catch(console.error);
     } else {
-      // handle regular non iOS 13+ devices
+      alert("You are not iPhone");
     }
   }
   </script>
   </head>
   <body>
 <input type="button" onclick="onClick()">
-  <div id="foo"></div>
+  <div id="foo" style="font-size: 20px;"></div>
   </body>
 </html>
